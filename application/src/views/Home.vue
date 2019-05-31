@@ -1,10 +1,6 @@
 <template>
 <div>
-  <data-table :main-data='test' msg='Hi Data table WEBC'></data-table>
-  <pre>
-    {{test}}
-  </pre>
-  
+  <data-table :main-data="getCustomers" msg="Hi Data table WEBC"></data-table>
 </div>
 
 </template>
@@ -21,30 +17,5 @@ import { IDataTable } from '../../../component/src/models/data.model';
      ]),
   }
 })
-export default class Home extends Vue {
-  private data() {
-    return {
-      test: [
-        {
-          DT_RowId: 'row_36',
-          users: {
-            first_name: 'Stewart',
-            last_name: 'Chan',
-            phone: '1-781-793-2340',
-            site: 6,
-          },
-          sites: {
-            name: 'Los Angeles',
-          },
-        },
-      ]
-    };
-  }
-  private created() {
-    /* tslint:disable */
-    console.log(this);
-    debugger;
-    /* tslint:enable */
-  }
-}
+export default class Home extends Vue {}
 </script>

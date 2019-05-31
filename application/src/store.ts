@@ -11,7 +11,7 @@ export default new Vuex.Store({
     countrys: data.customers.filter((entry: any) => entry.sites.name),
   },
   getters: {
-    getCustomers: (state) => state.data.customers
+    getCustomers: (state) => JSON.stringify(state.data)
   },
   mutations: {
     filterByName(state, name) {

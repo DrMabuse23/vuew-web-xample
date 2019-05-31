@@ -1,18 +1,18 @@
 <script lang="tsx">
 import { Component, Prop, Vue } from "vue-property-decorator";
-import { IDataTable } from './../models/data.model';
+import { IDataTable } from "./../models/data.model";
 
 @Component
 export default class DataTable extends Vue {
   @Prop() private mainData!: string;
   @Prop () private msg!: string;
-
-  created() {
-    /* tslint:disable */
-    console.log(this.mainData);
-    /* tslint:enable */
+  
+  private getParsedCustomer(data: string): IDataTable[] {
+    const myData: {customers: IDataTable[]} = JSON.parse(data);
+    return myData.customers;
   }
-  render() {
+  
+  private render() {
     return (
     <div>
       <h1>{this.msg}</h1>
@@ -25,18 +25,13 @@ export default class DataTable extends Vue {
             <th>Location</th>
           </tr>
         </thead>
-        <tbody v-if="mainData">
-        {JSON.parse(this.mainData).forEach((element: IDataTable) => {
-          `
-          ${JSON.stringify(element, null, 2)}
+        <tbody v-if="mainData">{this.getParsedCustomer(this.mainData).map((element) => (
           <tr>
-            <td>${element.users.first_name}</td>
-            <td>${element.users.last_name}</td>
-            <td>${element.sites.name}</td>
+            <td>{element.users.first_name}</td>
+            <td>{element.users.last_name}</td>
+            <td>{element.sites.name}</td>
           </tr>
-          `
-        })}
-        </tbody>
+        ))}</tbody>
       </table>
     </div>
     );
